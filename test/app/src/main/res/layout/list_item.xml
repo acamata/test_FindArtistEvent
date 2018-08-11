@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.sro5h.android_multiselect.CheckableLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="70dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+
+
+    <TextView
+        android:id="@+id/eventName"
+        android:layout_width="322dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="-15dp"
+        android:singleLine="true"
+        android:text="EventName"
+        android:textSize="@dimen/event_name_textSize" />
+
+    <TextView
+        android:id="@+id/eventDate"
+        android:layout_width="302dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="-300dp"
+        android:layout_marginTop="15dp"
+        android:singleLine="true"
+        android:text="EventDate" />
+
+
+    <CheckBox
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusable="false" />
+
+
+</com.example.sro5h.android_multiselect.CheckableLinearLayout>
