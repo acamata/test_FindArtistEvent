@@ -16,6 +16,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.alessio.test.AlarmReceiver;
+import com.example.alessio.test.CustomAdapter;
+import com.example.alessio.test.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -63,11 +67,6 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         CustomAdapter adapter = new CustomAdapter(this, artists);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setAdapter(adapter);
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 
     //scarica i dati tramite richiesta rest dal sito bandsintown
@@ -127,8 +126,12 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         }
     }
 
+    //click del pulsante "notifica", controlla gli eventi checkati e, se presnti, invia notifiche sulla notification bar del telefono
+    @Override
+    public void onClick(View view) {
+        
+    }
 
-    //collegamento pulsanti java-xml
     private void findViewsById() {
         listView = (ListView) findViewById(R.id.list);
         button = (Button) findViewById(R.id.button);
@@ -149,7 +152,20 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
         return result;
     }
 
+    // metodo di generazione della notifica ps: per ogni n eventi checkati non vengono create n notifiche ma ogni nuova notifica si "sovrappone" a quella vecchia. può essere un problema di "id"??
+    protected void generate_notification( int amount ) {
 
+        /*list.getFocusedChild().setBackgroundColor(Color.parseColor("#FFFAE3"));*/
+
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        Intent notificationIntent = new Intent(this, AlarmReceiver.class);
+        PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.SECOND, amount);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
+    }
 
 
 }
