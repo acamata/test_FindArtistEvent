@@ -129,7 +129,33 @@ public class MainActivity extends AppCompatActivity implements Button.OnClickLis
     //click del pulsante "notifica", controlla gli eventi checkati e, se presnti, invia notifiche sulla notification bar del telefono
     @Override
     public void onClick(View view) {
-        
+        switch (view.getId()) {
+            case R.id.button:
+                int i;
+                List<JSONObject> selected = getSelectedItems();
+                String logString = "";
+                for (i=0; i< selected.size();i++){
+                    JSONObject item = selected.get(i);
+                    generate_notification(5);
+
+                    try {
+                        logString= item.getString("title") + item.getString("formatted_datetime") + "\n";
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+                if (i!=0) {
+                    Log.d("MainActivity", "notifiche impostate");
+                    Toast.makeText(this, "notifiche impostate", Toast.LENGTH_SHORT).show();
+                }
+
+
+                break;
+        }
     }
 
     private void findViewsById() {
